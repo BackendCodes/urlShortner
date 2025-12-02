@@ -15,7 +15,7 @@ const generateUrl = async (req, res) => {
       createdBy: userid
     });
 
-    res.status(201).render('index.ejs',{url:shorturl.shortId});
+    res.status(201).render('index.ejs',{url:shorturl.shortId,baseUrl:process.env.baseUrl});
   } catch (error) {}
 };
 
