@@ -1,8 +1,7 @@
-const mongoose = require("mongoose");
-const { v4: uuidv4 } = require("uuid");
 const userModel = require("../models/user");
 // const {getUser,setUser} = require('../middlewares/auth')
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 exports.loginController = async (req, res) => {
   const { email, password } = req.body;
@@ -20,8 +19,10 @@ exports.loginController = async (req, res) => {
       return res.status(400).redirect("/register");
     }
 
+    const isMatch = await bcrypt.compare(password, user.password);
+
     // check password
-    if (password !== user.password) {
+    if (!isMatch) {
       return res.status(400).redirect("/login");
     }
 
@@ -57,19 +58,19 @@ exports.registerController = async (req, res) => {
     // check if user Exists in db
     const user = await userModel.findOne({ email });
 
-    console.log(user);
-
     if (user) {
       return res.status(400).render("login");
     }
 
+    // password hasing
+    const salt = await bcrypt.genSalt(10);
+    const hashedPwd = await bcrypt.hash(password, salt);
+
     const createUser = await userModel.create({
       name,
       email,
-      password,
+      password: hashedPwd,
     });
-
-    console.log(createUser);
 
     res.status(200).render("login");
   } catch (error) {

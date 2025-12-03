@@ -10,6 +10,6 @@ urlRoutes.post("/", restrictToLoogedinUserOnly, generateUrl);
 
 urlRoutes.get("/:id", RedirectUrl);
 
-urlRoutes.get("/analytics/:url",restrictToLoogedinUserOnly, getAnalytics);
+urlRoutes.get("/analytics/:url", restrictToLoogedinUserOnly, getAnalytics);
 
 module.exports = urlRoutes;
