@@ -9,7 +9,7 @@ const urlRoutes = express.Router();
 
 urlRoutes.post("/", restrictToLoogedinUserOnly, generateUrl);
 
-urlRoutes.post('/discord/', generateDiscordUrl)
+urlRoutes.post('/discord', generateDiscordUrl)
 
 urlRoutes.get("/:id", RedirectUrl);
 
