@@ -1,7 +1,7 @@
 const urlModel = require("../models/url");
 const { nanoid, customAlphabet } = require("nanoid");
 
-console.log(nanoid(8));
+
 
 const generateUrl = async (req, res) => {
   const { url } = req.body;

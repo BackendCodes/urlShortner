@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 dotenv.config();
+require('./utils/discordurlshortner')
 const express = require("express");
 const connectDB = require("./config/db");
 const urlRoutes = require("./routes/url");
